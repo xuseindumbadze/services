@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Service } from './service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,18 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('servises');
+
+  public allproduct:any;
+  public allcategories:any;
+
+  constructor(public API:Service){
+    this.ALLproducts()
+  }
+
+  ALLproducts(){
+    this.API.getAllProducts().subscribe((data:any)=>this.allproduct=data.products)
+  }
+
+  
+
 }
