@@ -11,17 +11,27 @@ import { Service } from './service';
 export class App {
   protected readonly title = signal('servises');
 
-  public allproduct:any;
-  public allcategories:any;
+  public allproduct: any;
+  public allcategories: any;
 
-  constructor(public API:Service){
-    this.ALLproducts()
+  constructor(public API: Service) {
+    this.ALLproducts();
+    this.Allcategories();
   }
 
-  ALLproducts(){
-    this.API.getAllProducts().subscribe((data:any)=>this.allproduct=data.products)
+  ALLproducts() {
+    this.API.getAllProducts().subscribe((data: any) => this.allproduct = data.products);
   }
 
-  
+  Allcategories() {
+    this.API.getCategories().subscribe((data: any) => this.allcategories = data);
+  }
 
+  filter(id: string) {
+    this.API.filterByCategory(id).subscribe((data: any) => this.allproduct = data.products);
+  }
+
+  resetFilter() {
+    this.ALLproducts();
+  }
 }

@@ -1,17 +1,37 @@
+<style>
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
 
-
-
+    .tato {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+  }
+</style>
 
 <router-outlet />
-<section>
-  @for (item of allproduct; track $index) {
-    <div class="card" style="width: 18rem;">
-  <img [src]="item.images" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{item.title}}</h5>
-    <p class="card-text">{{item.description}}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+
+<div class="container">
+  <div>
+    <button (click)="resetFilter()">All</button>
+    @for (item of allcategories; track $index) {
+      <button (click)="filter(item.id)">{{ item.name }}</button>
+    }
+  </div>
+
+  <div class="tato">
+    @for (item of allproduct; track $index) {
+      <div class="card" style="width: 18rem">
+        <img [src]="item.images[0]" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{ item.title }}</h5>
+          <p class="card-text">{{ item.description }}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    }
   </div>
 </div>
-  }
-</section>
